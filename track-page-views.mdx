@@ -1,0 +1,77 @@
+# Track Event API
+
+Track user session events such as page views and clicks.
+
+## Endpoint
+
+```
+POST /track-event
+```
+
+## Authentication
+
+Include your API key in the Authorization header:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Request Body
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `event` | string | Yes | Event type: `"view"` or `"click"` |
+| `data` | object | Yes | Event-specific data payload |
+
+## Response
+
+### Success (200 OK)
+
+```json
+{
+  "success": true
+}
+```
+
+### Error (400/401/500)
+
+```json
+{
+  "error": "Error type",
+  "message": "Error description"
+}
+```
+
+## Example
+
+```bash
+curl -X POST https://api.thred.dev/v1/track-event \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "event": "view",
+    "data": {
+      "url": "https://example.com/pricing",
+      "title": "Pricing Page",
+      "timestamp": 1735574400000
+    }
+  }'
+```
+
+```javascript
+await fetch('https://api.thred.dev/v1/track-event', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    event: 'view',
+    data: {
+      url: window.location.href,
+      title: document.title,
+      timestamp: Date.now()
+    }
+  })
+});
+```
