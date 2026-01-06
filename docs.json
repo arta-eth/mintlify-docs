@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "willow",
+  "theme": "linden",
   "name": "Thred Docs",
   "colors": {
     "primary": "#0D9373"
@@ -21,5 +21,13 @@
   "logo": {
     "light": "/images/2.png",
     "dark": "/images/3.png"
+  },
+  "fonts": {
+    "heading": {
+      "source": "https://fonts.googleapis.com/css2?family=Sriracha",
+      "family": "Sriracha",
+      "weight": 400,
+      "format": "woff2"
+    }
   }
 }
