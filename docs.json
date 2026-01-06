@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "almond",
+  "theme": "aspen",
   "name": "Thred Docs",
   "colors": {
     "primary": "#3FC8FC",
