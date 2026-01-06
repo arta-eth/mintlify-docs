@@ -33,6 +33,8 @@
     }
   },
   "background": {
-    "decoration": "grid"
+    "color": {
+      "dark": "#1A1A1A"
+    }
   }
 }
