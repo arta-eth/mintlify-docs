@@ -31,5 +31,8 @@
       "weight": 400,
       "format": "woff"
     }
+  },
+  "background": {
+    "decoration": "windows"
   }
 }
