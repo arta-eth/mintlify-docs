@@ -3,7 +3,9 @@
   "theme": "almond",
   "name": "Thred Docs",
   "colors": {
-    "primary": "#0D9373"
+    "primary": "#3FC8FC",
+    "light": "#3FC8FC",
+    "dark": "#63d3ff"
   },
   "navigation": {
     "groups": [
