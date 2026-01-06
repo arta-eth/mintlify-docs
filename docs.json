@@ -10,6 +10,7 @@
       {
         "group": "Getting Started",
         "pages": [
+          "getting-started/fetch-leads",
           "getting-started/untitled-page"
         ]
       }

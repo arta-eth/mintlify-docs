@@ -1,0 +1,253 @@
+---
+title: "Get Enriched Conversation"
+description: "Fetch the enriched ChatGPT conversation for a lead using the Chat ID."
+---
+
+## Endpoint
+
+```
+GET /chat/:chatId
+```
+
+## Authentication
+
+Include your API key in the Authorization header:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+## URL Parameters
+
+| Parameter | Type   | Required | Description                                 |
+| --------- | ------ | -------- | ------------------------------------------- |
+| `chatId`  | string | Yes      | The chat ID returned when creating the chat |
+
+## Response
+
+### When Status is "pending"
+
+Returns minimal information while the chat is being processed:
+
+```json
+{
+  "status": "pending",
+  "leadData": {
+    "name": "Sarah Johnson",
+    "email": "sarah@example.com",
+    "company": "TechCorp",
+    "role": "VP of Engineering"
+  },
+  "progress": 25
+}
+```
+
+### When Status is "processing", "completed", or "failed"
+
+Returns full conversation data:
+
+```json
+{
+  "status": "completed",
+  "leadData": {
+    "name": "Sarah Johnson",
+    "email": "sarah@example.com",
+    "company": "TechCorp",
+    "role": "VP of Engineering"
+  },
+  "turnCount": 5,
+  "summary": "Sarah is evaluating solutions for her engineering team...",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "What features do you need for your team?"
+    },
+    {
+      "role": "assistant",
+      "content": "We're looking for CI/CD integration and better deployment tools."
+    },
+    {
+      "role": "user",
+      "content": "Have you considered any specific tools?"
+    },
+    {
+      "role": "assistant",
+      "content": "We've been evaluating GitHub Actions and Jenkins."
+    }
+  ],
+  "progress": 100
+}
+```
+
+### Response Fields
+
+| Field          | Type   | Description                                      |
+| -------------- | ------ | ------------------------------------------------ |
+| `status`       | string | Chat status: "pending", "completed", or "failed" |
+| `leadData`     | object | Original lead information                        |
+| `progress`     | number | Processing progress (0-100)                      |
+| `turnCount`    | number | Maximum number of turns in conversation          |
+| `summary`      | string | Summary of the conversation                      |
+| `conversation` | array  | Array of conversation turns                      |
+
+### Conversation Format
+
+Each message in the conversation array follows the GPT API format:
+
+```typescript
+{
+  role: "user" | "assistant",
+  content: string
+}
+```
+
+- `user` messages are the questions asked
+- `assistant` messages are the lead's responses
+
+### Error Responses
+
+#### 400 Bad Request
+
+```json
+{
+  "error": "Bad request",
+  "message": "Invalid chatId format"
+}
+```
+
+#### 401 Unauthorized
+
+```json
+{
+  "error": "Unauthorized",
+  "message": "Workspace ID not found in request"
+}
+```
+
+#### 403 Forbidden
+
+```json
+{
+  "error": "Forbidden",
+  "message": "You don't have access to this chat"
+}
+```
+
+#### 404 Not Found
+
+```json
+{
+  "error": "Not found",
+  "message": "Chat not found"
+}
+```
+
+#### 500 Internal Server Error
+
+```json
+{
+  "error": "Failed to fetch chat",
+  "message": "Error description"
+}
+```
+
+## Examples
+
+### cURL
+
+```bash
+curl -X GET https://api.thred.dev/v1/chat/k17f5j9m8k7j5n4m3k2j1h0g9f8e7d6c \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### JavaScript
+
+```javascript
+const chatId = 'k17f5j9m8k7j5n4m3k2j1h0g9f8e7d6c';
+
+const response = await fetch(`https://api.thred.dev/v1/chat/${chatId}`, {
+  method: 'GET',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY'
+  }
+});
+
+const conversation = await response.json();
+
+if (conversation.status === 'pending') {
+  console.log(`Processing: ${conversation.progress}% complete`);
+} else {
+  console.log(`Summary: ${conversation.summary}`);
+  console.log(`Turns: ${conversation.conversation.length}`);
+  
+  // Display conversation
+  conversation.conversation.forEach(message => {
+    console.log(`${message.role}: ${message.content}`);
+  });
+}
+```
+
+### Python
+
+```python
+import requests
+
+chat_id = 'k17f5j9m8k7j5n4m3k2j1h0g9f8e7d6c'
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY'
+}
+
+response = requests.get(
+    f'https://api.thred.dev/v1/chat/{chat_id}',
+    headers=headers
+)
+
+conversation = response.json()
+
+if conversation['status'] == 'pending':
+    print(f"Processing: {conversation['progress']}% complete")
+else:
+    print(f"Summary: {conversation['summary']}")
+    print(f"Turns: {len(conversation['conversation'])}")
+    
+    # Display conversation
+    for message in conversation['conversation']:
+        print(f"{message['role']}: {message['content']}")
+```
+
+## Polling for Completion
+
+When you create a chat, it starts in "pending" status. You can poll this endpoint to check when the conversation is complete:
+
+```javascript
+async function waitForCompletion(chatId, apiKey) {
+  const pollInterval = 2000; // 2 seconds
+  const maxAttempts = 150; // 5 minutes max
+  
+  for (let i = 0; i < maxAttempts; i++) {
+    const response = await fetch(`https://api.thred.dev/v1/chat/${chatId}`, {
+      headers: { 'Authorization': `Bearer ${apiKey}` }
+    });
+    
+    const data = await response.json();
+    
+    if (data.status === 'completed') {
+      return data;
+    }
+    
+    if (data.status === 'failed') {
+      throw new Error('Chat processing failed');
+    }
+    
+    console.log(`Progress: ${data.progress}%`);
+    await new Promise(resolve => setTimeout(resolve, pollInterval));
+  }
+  
+  throw new Error('Timeout waiting for chat completion');
+}
+
+// Usage
+const chatId = 'k17f5j9m8k7j5n4m3k2j1h0g9f8e7d6c';
+const conversation = await waitForCompletion(chatId, 'YOUR_API_KEY');
+console.log(conversation);
+```
