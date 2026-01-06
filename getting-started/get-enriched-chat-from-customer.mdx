@@ -83,14 +83,14 @@ Returns full conversation data:
 
 ### Response Fields
 
-| Field          | Type   | Description                                      |
-| -------------- | ------ | ------------------------------------------------ |
-| `status`       | string | Chat status: "pending", "completed", or "failed" |
-| `leadData`     | object | Original lead information                        |
-| `progress`     | number | Processing progress (0-100)                      |
-| `turnCount`    | number | Maximum number of turns in conversation          |
-| `summary`      | string | AI-generated summary of the conversation         |
-| `conversation` | array  | Array of conversation turns in GPT API format    |
+| Field          | Type   | Description                                                    |
+| -------------- | ------ | -------------------------------------------------------------- |
+| `status`       | string | Chat status: "pending", "processing", "completed", or "failed" |
+| `leadData`     | object | Original lead information                                      |
+| `progress`     | number | Processing progress (0-100)                                    |
+| `turnCount`    | number | Maximum number of turns in conversation                        |
+| `summary`      | string | AI-generated summary of the conversation                       |
+| `conversation` | array  | Array of conversation turns in GPT API format                  |
 
 ### Conversation Format
 
