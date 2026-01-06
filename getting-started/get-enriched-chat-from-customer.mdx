@@ -1,0 +1,362 @@
+---
+title: "Get Enriched Chat from Email"
+description: "Fetch the enriched ChatGPT conversation for a lead using their email address"
+---
+
+## Endpoint
+
+```
+GET https://api.thred.dev/v1/chats/customer?email=<email>
+```
+
+## Authentication
+
+Include your API key in the Authorization header:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Query Parameters
+
+| Parameter | Type   | Required | Description                  |
+| --------- | ------ | -------- | ---------------------------- |
+| `email`   | string | Yes      | The customer's email address |
+
+## Response
+
+### When Status is "pending"
+
+Returns minimal information while the chat is being processed:
+
+```json
+{
+  "status": "pending",
+  "leadData": {
+    "name": "Sarah Johnson",
+    "email": "sarah@example.com",
+    "company": "TechCorp",
+    "role": "VP of Engineering"
+  },
+  "progress": 25
+}
+```
+
+### When Status is "completed", or "failed"
+
+Returns full conversation data:
+
+```json
+{
+  "status": "completed",
+  "leadData": {
+    "name": "Sarah Johnson",
+    "email": "sarah@example.com",
+    "company": "TechCorp",
+    "role": "VP of Engineering"
+  },
+  "turnCount": 5,
+  "summary": "Sarah is evaluating solutions for her engineering team...",
+  "conversation": [
+    {
+      "role": "user",
+      "content": "What features do you need for your team?"
+    },
+    {
+      "role": "assistant",
+      "content": "We're looking for CI/CD integration and better deployment tools."
+    },
+    {
+      "role": "user",
+      "content": "Have you considered any specific tools?"
+    },
+    {
+      "role": "assistant",
+      "content": "We've been evaluating GitHub Actions and Jenkins."
+    }
+  ],
+  "progress": 100
+}
+```
+
+### Response Fields
+
+| Field          | Type   | Description                                      |
+| -------------- | ------ | ------------------------------------------------ |
+| `status`       | string | Chat status: "pending", "completed", or "failed" |
+| `leadData`     | object | Original lead information                        |
+| `progress`     | number | Processing progress (0-100)                      |
+| `turnCount`    | number | Maximum number of turns in conversation          |
+| `summary`      | string | AI-generated summary of the conversation         |
+| `conversation` | array  | Array of conversation turns in GPT API format    |
+
+### Conversation Format
+
+Each message in the conversation array follows the GPT API format:
+
+```typescript
+{
+  role: "user" | "assistant",
+  content: string
+}
+```
+
+- `user` messages are the questions asked
+- `assistant` messages are the lead's responses
+
+### Error Responses
+
+#### 400 Bad Request
+
+```json
+{
+  "error": "Bad request",
+  "message": "Email query parameter is required"
+}
+```
+
+```json
+{
+  "error": "Bad request",
+  "message": "Invalid email format"
+}
+```
+
+#### 401 Unauthorized
+
+```json
+{
+  "error": "Unauthorized",
+  "message": "Workspace ID not found in request"
+}
+```
+
+#### 404 Not Found
+
+```json
+{
+  "error": "Not found",
+  "message": "Customer not found with this email"
+}
+```
+
+```json
+{
+  "error": "Not found",
+  "message": "No chats found for this customer"
+}
+```
+
+#### 500 Internal Server Error
+
+```json
+{
+  "error": "Failed to fetch chat",
+  "message": "Error description"
+}
+```
+
+## Examples
+
+### cURL
+
+```bash
+curl -X GET "https://api.thred.dev/v1/chats/customer?email=sarah@example.com" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+With pretty printing:
+
+```bash
+curl -X GET "https://api.thred.dev/v1/chats/customer?email=sarah@example.com" \
+  -H "Authorization: Bearer YOUR_API_KEY" | jq '.'
+```
+
+### JavaScript
+
+```javascript
+const email = 'sarah@example.com';
+
+const response = await fetch(
+  `https://api.thred.dev/v1/chats/customer?email=${encodeURIComponent(email)}`,
+  {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY'
+    }
+  }
+);
+
+const conversation = await response.json();
+
+if (conversation.status === 'pending') {
+  console.log(`Processing: ${conversation.progress}% complete`);
+} else {
+  console.log(`Summary: ${conversation.summary}`);
+  console.log(`Turns: ${conversation.conversation.length}`);
+  
+  // Display conversation
+  conversation.conversation.forEach(message => {
+    console.log(`${message.role}: ${message.content}`);
+  });
+}
+```
+
+### Python
+
+```python
+import requests
+
+email = 'sarah@example.com'
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY'
+}
+
+response = requests.get(
+    'https://api.thred.dev/v1/chats/customer',
+    params={'email': email},
+    headers=headers
+)
+
+conversation = response.json()
+
+if conversation['status'] == 'pending':
+    print(f"Processing: {conversation['progress']}% complete")
+else:
+    print(f"Summary: {conversation['summary']}")
+    print(f"Turns: {len(conversation['conversation'])}")
+    
+    # Display conversation
+    for message in conversation['conversation']:
+        print(f"{message['role']}: {message['content']}")
+```
+
+### TypeScript/Node.js
+
+```typescript
+import fetch from 'node-fetch';
+
+interface ChatResponse {
+  status: 'pending' | 'processing' | 'completed' | 'failed';
+  leadData: any;
+  progress: number;
+  turnCount?: number;
+  summary?: string;
+  conversation?: Array<{
+    role: 'user' | 'assistant';
+    content: string;
+  }>;
+}
+
+async function getChatByEmail(email: string, apiKey: string): Promise<ChatResponse> {
+  const response = await fetch(
+    `https://api.thred.dev/v1/chats/customer?email=${encodeURIComponent(email)}`,
+    {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`
+      }
+    }
+  );
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return await response.json();
+}
+
+// Usage
+const conversation = await getChatByEmail('sarah@example.com', 'YOUR_API_KEY');
+console.log(conversation);
+```
+
+## Use Cases
+
+### 1. CRM Integration
+
+Enrich customer records in your CRM with their AI chat history:
+
+```javascript
+// When viewing a customer in CRM
+async function enrichCustomerProfile(customerEmail) {
+  const chat = await fetch(
+    `https://api.thred.dev/v1/chats/customer?email=${encodeURIComponent(customerEmail)}`,
+    { headers: { 'Authorization': `Bearer ${apiKey}` } }
+  ).then(r => r.json());
+  
+  return {
+    ...customer,
+    latestResearchSummary: chat.summary,
+    lastInteractionStatus: chat.status,
+    conversationHistory: chat.conversation
+  };
+}
+```
+
+### 2. Email Personalization
+
+Use chat insights to personalize follow-up emails:
+
+```python
+# Get customer's research chat
+response = requests.get(
+    'https://api.thred.dev/v1/chats/customer',
+    params={'email': lead_email},
+    headers={'Authorization': f'Bearer {api_key}'}
+)
+chat = response.json()
+
+# Personalize email based on their questions
+if chat['status'] == 'completed':
+    concerns = extract_concerns(chat['conversation'])
+    email_body = generate_personalized_email(concerns)
+```
+
+## Polling for Completion
+
+If the chat is still being processed, you can poll this endpoint to check when it's complete:
+
+```javascript
+async function waitForChatCompletion(email, apiKey) {
+  const pollInterval = 2000; // 2 seconds
+  const maxAttempts = 150; // 5 minutes max
+  
+  for (let i = 0; i < maxAttempts; i++) {
+    const response = await fetch(
+      `https://api.thred.dev/v1/chats/customer?email=${encodeURIComponent(email)}`,
+      { headers: { 'Authorization': `Bearer ${apiKey}` } }
+    );
+    
+    const data = await response.json();
+    
+    if (data.status === 'completed') {
+      return data;
+    }
+    
+    if (data.status === 'failed') {
+      throw new Error('Chat processing failed');
+    }
+    
+    console.log(`Progress: ${data.progress}%`);
+    await new Promise(resolve => setTimeout(resolve, pollInterval));
+  }
+  
+  throw new Error('Timeout waiting for chat completion');
+}
+
+// Usage
+try {
+  const conversation = await waitForChatCompletion('sarah@example.com', 'YOUR_API_KEY');
+  console.log('Chat completed:', conversation);
+} catch (error) {
+  console.error('Error:', error.message);
+}
+```
+
+## Notes
+
+- The email is matched against the `email` field in the customer's lead data
+- Email matching is case-sensitive
+- URL encoding is handled automatically by most HTTP clients, but manual encoding may be required for special characters
