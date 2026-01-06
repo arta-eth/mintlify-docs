@@ -17,5 +17,9 @@
       }
     ]
   },
-  "favicon": "/images/icon.ico"
+  "favicon": "/images/icon.ico",
+  "logo": {
+    "light": "/images/logo_full_dark.png",
+    "dark": "/images/logo_full_light.png"
+  }
 }
