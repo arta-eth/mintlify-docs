@@ -19,7 +19,7 @@
   },
   "favicon": "/images/icon.ico",
   "logo": {
-    "light": "/images/logo_full_dark.png",
-    "dark": "/images/logo_full_light.png"
+    "light": "/images/2.png",
+    "dark": "/images/3.png"
   }
 }
