@@ -26,7 +26,7 @@
   },
   "fonts": {
     "heading": {
-      "source": "https://fonts.googleapis.com/css2?family=Sriracha",
+      "source": "https://fonts.googleapis.com/css2?family=Sriracha&display=swap",
       "family": "Sriracha",
       "weight": 400,
       "format": "woff"
