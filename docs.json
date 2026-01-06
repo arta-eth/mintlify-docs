@@ -12,7 +12,7 @@
       {
         "group": "Getting Started",
         "pages": [
-          "getting-started/untitled-page",
+          "getting-started/create-enrichment",
           "getting-started/fetch-leads",
           "getting-started/get-enriched-chat-from-customer"
         ]
