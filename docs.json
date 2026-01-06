@@ -3,8 +3,8 @@
   "theme": "aspen",
   "name": "Thred Docs",
   "colors": {
-    "primary": "#3FC8FC",
-    "light": "#3FC8FC",
+    "primary": "#07b3f7",
+    "light": "#07b3f7",
     "dark": "#63d3ff"
   },
   "navigation": {
