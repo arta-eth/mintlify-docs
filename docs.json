@@ -16,6 +16,12 @@
           "getting-started/fetch-leads",
           "getting-started/get-enriched-chat-from-customer"
         ]
+      },
+      {
+        "group": "Integrations",
+        "pages": [
+          "integrations/untitled-page"
+        ]
       }
     ]
   },
