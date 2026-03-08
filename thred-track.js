@@ -5,13 +5,29 @@
     console.log('Body exists:', !!document.body);
     
     var script = document.createElement('script');
-    script.src = 'https://cdn.thred.dev/thred-track.js?browserKey=0ec3ca8a-1507-4848-958e-477b175fcc69&debug=true';
+    // Load the script WITHOUT browserKey in URL - we'll initialize manually
+    script.src = 'https://cdn.thred.dev/thred-track.js';
     script.type = 'text/javascript';
     
     script.onload = function() {
       console.log('Thred tracking script loaded successfully');
-      console.log('Window.Thred:', window.Thred);
-      console.log('Window.thred:', window.thred);
+      
+      // Manually initialize the SDK
+      if (window.ThredSDK) {
+        try {
+          console.log('Initializing ThredSDK manually...');
+          var sdk = new window.ThredSDK({ 
+            browserKey: '0ec3ca8a-1507-4848-958e-477b175fcc69',
+            debug: true 
+          });
+          window.Thred = sdk;
+          console.log('ThredSDK initialized:', sdk);
+        } catch (error) {
+          console.error('Failed to initialize ThredSDK:', error);
+        }
+      } else {
+        console.error('ThredSDK class not found on window object');
+      }
     };
     
     script.onerror = function(error) {
