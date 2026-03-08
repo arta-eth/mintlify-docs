@@ -11,7 +11,29 @@
     script.onload = function() {
       console.log('Thred tracking script loaded successfully');
       console.log('Window.Thred:', window.Thred);
-      console.log('Window.thred:', window.thred);
+      
+      // Initialize ThredSDK
+      if (window.Thred && window.Thred.ThredSDK) {
+        try {
+          var thredInstance = new window.Thred.ThredSDK({
+            browserKey: '0ec3ca8a-1507-4848-958e-477b175fcc69',
+            debug: true
+          });
+          console.log('Thred SDK initialized:', thredInstance);
+        } catch (error) {
+          console.error('Failed to initialize Thred SDK:', error);
+        }
+      } else if (window.Thred && window.Thred.default) {
+        try {
+          var thredInstance = new window.Thred.default({
+            browserKey: '0ec3ca8a-1507-4848-958e-477b175fcc69',
+            debug: true
+          });
+          console.log('Thred SDK initialized via default export:', thredInstance);
+        } catch (error) {
+          console.error('Failed to initialize Thred SDK via default:', error);
+        }
+      }
     };
     
     script.onerror = function(error) {
