@@ -1,48 +1,42 @@
 ---
 title: "Introduction"
-description: "Welcome to the Thred documentation"
+description: "Overview of the Thred Developer API."
+icon: "book-open-cover"
+og:image: "https://firebasestorage.googleapis.com/v0/b/thred-ai.appspot.com/o/Marketing%2Fdocs.png?alt=media"
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.svg"
-  alt="Hero Light"
-/>
+Thred helps GTM teams surface buyer intent from AI search conversations across ChatGPT, Gemini, Claude, and Perplexity.
 
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.svg"
-  alt="Hero Dark"
-/>
+## Base URL
 
-## Setting up
+```bash
+https://api.thred.dev/v1
+```
 
-The first step to world-class documentation is setting up your editing environments.
+## Authentication
 
-<CardGroup cols={2}>
-  <Card title="Edit Your Docs" icon="pen-to-square" href="https://mintlify.com/docs/quickstart">
-    Get your docs set up locally for easy development
-  </Card>
-  <Card title="Preview Changes" icon="image" href="https://mintlify.com/docs/development">
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
+Include your API key in the Authorization header:
 
-## Make it yours
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
 
-Update your docs to your brand and add valuable content for the best user conversion.
+## Available Endpoints
 
-<CardGroup cols={2}>
-  <Card title="Customize Style" icon="palette" href="https://mintlify.com/docs/settings/global">
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card title="Reference APIs" icon="code" href="https://mintlify.com/docs/api-playground/openapi">
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card title="Add Components" icon="screwdriver-wrench" href="https://mintlify.com/docs/components/accordion">
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card title="Get Inspiration" icon="stars" href="https://mintlify.com/customers">
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+Use the following endpoints to retrieve conversation transcripts and insights:
+
+- customer email
+- customer ID
+- company name
+- recent activity filters
+
+| Use case                      | Endpoint                                             |
+| ---------------------------- | ---------------------------------------------------- |
+| Fetch by email               | `GET /customers?email=<email>`                       |
+| Fetch by customer ID         | `GET /customers/:customerId`                         |
+| Fetch by company             | `GET /customers/by-company?name=<company_name>`      |
+| Fetch recent conversations   | `GET /customers/recent`                              |
+
+## Next Step
+
+Start with [Fetch Conversation by Email](/getting-started/get-enriched-chat-from-customer), then move to company and recent filters as needed.
