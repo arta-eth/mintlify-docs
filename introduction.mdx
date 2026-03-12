@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-description: "Complete overview of Thred website script, APIs, MCP, and integrations."
+description: "Start here to choose the right implementation path across script install, API retrieval, and MCP access."
 icon: "book-open-cover"
 og:image: "https://firebasestorage.googleapis.com/v0/b/thred-ai.appspot.com/o/Marketing%2Fdocs.png?alt=media"
 ---
@@ -9,16 +9,15 @@ Thred helps GTM teams surface buyer intent from AI search conversations across C
 
 ## Docs Structure
 
-This documentation has four core sections:
+Use this map to pick the right implementation path:
 
 - [Track AI Search Signals](/script-tracking/ai-search-signals): install the tracking script on your site
 - [Conversations API](/getting-started/get-enriched-chat-from-customer): retrieve conversations and insights
 - [MCP Server](/mcp/overview): connect Thred tools in Cursor, Claude Desktop, and other MCP clients
-- [Integrations](/integrations/calcom): configure downstream integrations
 
 ## 1) Track AI Search Signals
 
-Install the script to start capturing AI search signals:
+Install the script first to capture AI search signals:
 
 ```html
 <script src="https://cdn.thred.dev/thred-track.js?browserKey=YOUR_BROWSER_KEY"></script>
@@ -26,9 +25,11 @@ Install the script to start capturing AI search signals:
 
 Start here: [Website Script](/script-tracking/ai-search-signals)
 
+For conversion capture setup, see [Custom Form Tracking](/script-tracking/form-tracking) and [Cal.com Form Tracking](/integrations/calcom).
+
 ## 2) Conversations API
 
-Use the API to retrieve conversation transcripts and insights.
+Use the API to pull customer transcripts and insight payloads.
 
 Base URL:
 
@@ -63,10 +64,6 @@ MCP docs:
 - [MCP Setup](/mcp/setup)
 - [MCP Tools Reference](/mcp/tools-reference)
 
-## 4) Integrations
+Also includes:
 
-Use integrations to map and sync signal data into your workflow tools.
-
-Current guide:
-
-- [Cal.com](/integrations/calcom)
+- [Cal.com Form Tracking](/integrations/calcom)

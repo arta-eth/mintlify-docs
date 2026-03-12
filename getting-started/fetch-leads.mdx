@@ -1,6 +1,6 @@
 ---
 title: "Get Conversation by Customer ID"
-description: "Retrieve a generated conversation using a customer ID."
+description: "Query a specific customer record and return transcript status and insight payloads."
 icon: "rectangle-code"
 og:image: "https://firebasestorage.googleapis.com/v0/b/thred-ai.appspot.com/o/Marketing%2Fdocs.png?alt=media"
 ---
@@ -27,7 +27,7 @@ Authorization: Bearer YOUR_API_KEY
 
 ## Response
 
-This endpoint returns the same response shape as fetch-by-email:
+Response shape matches the email lookup endpoint:
 
 - Processing: `status`, `name`, `email`, `company`, `platform`, `progress`
 - Completed: includes `summary`, `conversation`, `insights`, `suggestions`, and `link`
