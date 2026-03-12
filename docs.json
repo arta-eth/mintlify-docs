@@ -16,9 +16,10 @@
         ]
       },
       {
-        "group": "Website Script",
+        "group": "Track AI Search Signals",
         "pages": [
-          "script-tracking/ai-search-signals"
+          "script-tracking/ai-search-signals",
+          "script-tracking/form-tracking"
         ]
       },
       {

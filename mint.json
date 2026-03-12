@@ -17,8 +17,11 @@
       "pages": ["introduction"]
     },
     {
-      "group": "Website Script",
-      "pages": ["script-tracking/ai-search-signals"]
+      "group": "Track AI Search Signals",
+      "pages": [
+        "script-tracking/ai-search-signals",
+        "script-tracking/form-tracking"
+      ]
     },
     {
       "group": "Conversations API",

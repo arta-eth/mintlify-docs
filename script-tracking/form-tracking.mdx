@@ -1,0 +1,44 @@
+---
+title: "Form Tracking"
+description: "Configure form field selectors so Thred can map captured submissions correctly."
+icon: "rectangle-list"
+---
+
+Use form tracking settings to map your website form fields to Thred.
+
+## Required Configuration
+
+In the Thred app, open **Track AI Search Conversations** and set:
+
+- `Form ID`: your form element `id` attribute
+- `Name Input`: the `name` attribute for your name field
+- `Email Input`: the `name` attribute for your email field
+
+Optional:
+
+- `Company Input`: the `name` attribute for your company field
+
+## Example Mapping
+
+If your form looks like this:
+
+```html
+<form id="contact-form">
+  <input name="name" />
+  <input name="email" />
+  <input name="company" />
+</form>
+```
+
+Then your Thred configuration should be:
+
+- `Form ID`: `contact-form`
+- `Name Input`: `name`
+- `Email Input`: `email`
+- `Company Input`: `company`
+
+## Save and Verify
+
+1. Click **Save changes** in Thred.
+2. Submit a test form on your website.
+3. Confirm the lead appears with mapped name/email (and company if configured).
