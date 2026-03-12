@@ -3,9 +3,12 @@
     console.log('Loading Thred script...');
     console.log('Document ready state:', document.readyState);
     console.log('Body exists:', !!document.body);
-    
+
+
+    const browserKey = '0ec3ca8a-1507-4848-958e-477b175fcc69';
+
     var script = document.createElement('script');
-    script.src = 'https://cdn.thred.dev/thred-track.js?browserKey=0ec3ca8a-1507-4848-958e-477b175fcc69&debug=true';
+    script.src = `https://cdn.thred.dev/thred-track.js?browserKey=${browserKey}&debug=true`;
     script.type = 'text/javascript';
     
     script.onload = function() {
@@ -16,7 +19,7 @@
       if (window.Thred && window.Thred.ThredSDK) {
         try {
           var thredInstance = new window.Thred.ThredSDK({
-            browserKey: 'YOUR_BROWSER_KEY',
+            browserKey: browserKey,
             debug: true
           });
           console.log('Thred SDK initialized:', thredInstance);
@@ -26,7 +29,7 @@
       } else if (window.Thred && window.Thred.default) {
         try {
           var thredInstance = new window.Thred.default({
-            browserKey: 'YOUR_BROWSER_KEY',
+            browserKey: browserKey,
             debug: true
           });
           console.log('Thred SDK initialized via default export:', thredInstance);
