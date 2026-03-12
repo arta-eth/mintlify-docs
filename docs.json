@@ -10,11 +10,18 @@
   "navigation": {
     "groups": [
       {
-        "group": "Getting Started",
+        "group": "Introduction",
         "pages": [
-          "getting-started/create-enrichment",
+          "introduction"
+        ]
+      },
+      {
+        "group": "Conversations API",
+        "pages": [
+          "getting-started/get-enriched-chat-from-customer",
           "getting-started/fetch-leads",
-          "getting-started/get-enriched-chat-from-customer"
+          "getting-started/fetch-by-company",
+          "getting-started/fetch-recent-conversations"
         ]
       },
       {
