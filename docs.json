@@ -19,7 +19,8 @@
         "group": "Track AI Search Signals",
         "pages": [
           "script-tracking/ai-search-signals",
-          "script-tracking/form-tracking"
+          "script-tracking/form-tracking",
+          "integrations/calcom"
         ]
       },
       {
@@ -37,12 +38,6 @@
           "mcp/overview",
           "mcp/setup",
           "mcp/tools-reference"
-        ]
-      },
-      {
-        "group": "Integrations",
-        "pages": [
-          "integrations/calcom"
         ]
       }
     ]

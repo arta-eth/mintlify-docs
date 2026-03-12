@@ -1,12 +1,12 @@
 ---
 title: "MCP Tools Reference"
-description: "Input schemas and usage examples for every Thred MCP tool."
+description: "Find parameter contracts and example payloads for each available tool."
 icon: "screwdriver-wrench"
 ---
 
 ## `get_transcript_by_email`
 
-Retrieve a full customer transcript by email.
+Return a full, turn-by-turn transcript using customer email.
 
 ### Input
 
@@ -24,7 +24,7 @@ Retrieve a full customer transcript by email.
 
 ## `get_transcript_by_id`
 
-Retrieve a full customer transcript by Thred customer ID.
+Look up a complete transcript by Thred customer ID.
 
 ### Input
 
@@ -42,7 +42,7 @@ Retrieve a full customer transcript by Thred customer ID.
 
 ## `get_customer_insights`
 
-Retrieve customer insights, buying signals, concerns, competitors, and suggestions.
+Summarize buying signals, concerns, competitors, and suggested actions for one customer.
 
 ### Input
 
@@ -69,7 +69,7 @@ Provide at least one of `email` or `customerId`.
 
 ## `get_insights_by_company`
 
-Retrieve customer conversation summaries and insights for a company.
+List matched customers for a company along with conversation summaries and insight blocks.
 
 ### Input
 
@@ -87,7 +87,7 @@ Retrieve customer conversation summaries and insights for a company.
 
 ## `get_recent_customers`
 
-Retrieve recent customer conversations, optionally filtered by platforms and date range.
+Return the latest customer conversations with optional platform and date-range filters.
 
 ### Input
 
@@ -111,7 +111,7 @@ Retrieve recent customer conversations, optionally filtered by platforms and dat
 
 ## `check_backend_health`
 
-Check if the Thred backend is reachable.
+Confirm the Thred backend is reachable before running deeper queries.
 
 ### Input
 

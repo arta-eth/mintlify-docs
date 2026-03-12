@@ -1,6 +1,6 @@
 ---
 title: "Get Conversation by Email"
-description: "Retrieve a customer's generated conversation using their email address."
+description: "Look up one customer record by email and return transcript status, summary, and signals."
 icon: "envelope"
 og:image: "https://firebasestorage.googleapis.com/v0/b/thred-ai.appspot.com/o/Marketing%2Fdocs.png?alt=media"
 ---
@@ -29,7 +29,7 @@ Authorization: Bearer YOUR_API_KEY
 
 ### Processing Response
 
-When the conversation is still in progress:
+Returned while processing is still in progress:
 
 ```json
 {
@@ -44,7 +44,7 @@ When the conversation is still in progress:
 
 ### Completed Response
 
-When the conversation is complete:
+Returned after processing completes:
 
 ```json
 {
