@@ -20,7 +20,7 @@
         "pages": [
           "script-tracking/ai-search-signals",
           "script-tracking/form-tracking",
-          "integrations/calcom"
+          "script-tracking/calcom"
         ]
       },
       {
