@@ -1,0 +1,118 @@
+---
+title: "MCP Tools Reference"
+description: "Input schemas and usage examples for every Thred MCP tool."
+icon: "screwdriver-wrench"
+---
+
+## `get_transcript_by_email`
+
+Retrieve a full customer transcript by email.
+
+### Input
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `email` | string (email) | Yes | Customer email address |
+
+### Example
+
+```json
+{
+  "email": "sarah@example.com"
+}
+```
+
+## `get_transcript_by_id`
+
+Retrieve a full customer transcript by Thred customer ID.
+
+### Input
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `customerId` | string | Yes | Thred customer ID |
+
+### Example
+
+```json
+{
+  "customerId": "k17f5j9m8k7j5n4m3k2j1h0g9f8e7d6c"
+}
+```
+
+## `get_customer_insights`
+
+Retrieve customer insights, buying signals, concerns, competitors, and suggestions.
+
+### Input
+
+Provide at least one of `email` or `customerId`.
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `email` | string (email) | No | Customer email |
+| `customerId` | string | No | Thred customer ID |
+
+### Examples
+
+```json
+{
+  "email": "sarah@example.com"
+}
+```
+
+```json
+{
+  "customerId": "k17f5j9m8k7j5n4m3k2j1h0g9f8e7d6c"
+}
+```
+
+## `get_insights_by_company`
+
+Retrieve customer conversation summaries and insights for a company.
+
+### Input
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `companyName` | string | Yes | Company name (fuzzy matching supported) |
+
+### Example
+
+```json
+{
+  "companyName": "TechCorp"
+}
+```
+
+## `get_recent_customers`
+
+Retrieve recent customer conversations, optionally filtered by platforms and date range.
+
+### Input
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `platforms` | string[] | No | Platform filters (`chatgpt`, `claude`, `gemini`, `pplx`) |
+| `limit` | number | No | Results to return (default `3`, max `50`) |
+| `startDate` | number | No | Unix timestamp in milliseconds |
+| `endDate` | number | No | Unix timestamp in milliseconds |
+
+### Example
+
+```json
+{
+  "platforms": ["chatgpt", "claude"],
+  "limit": 10,
+  "startDate": 1739913600000,
+  "endDate": 1740000000000
+}
+```
+
+## `check_backend_health`
+
+Check if the Thred backend is reachable.
+
+### Input
+
+No input fields.
