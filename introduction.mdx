@@ -5,65 +5,49 @@ icon: "book-open-cover"
 og:image: "https://firebasestorage.googleapis.com/v0/b/thred-ai.appspot.com/o/Marketing%2Fdocs.png?alt=media"
 ---
 
-Start here to choose the right implementation path across script install, API retrieval, and MCP access.
+These docs outline how to install Thred tracking, capture AI-origin conversions, and access conversation data through API or MCP.
 
-## Docs Structure
+## Website Tracking
 
-Use this map to pick the right implementation path:
+<CardGroup cols={2}>
+  <Card title="Website Script" icon="signal-stream" href="/script-tracking/ai-search-signals">
+    Install the script that captures AI-origin buyer activity.
+  </Card>
+  <Card title="Custom Form Tracking" icon="rectangle-list" href="/script-tracking/form-tracking">
+    Map your site form fields for conversion attribution.
+  </Card>
+  <Card title="Cal.com Form Tracking" icon="calendar" href="/integrations/calcom">
+    Configure Cal.com bookings as attributable conversion events.
+  </Card>
+</CardGroup>
 
-- [Track AI Search Signals](/script-tracking/ai-search-signals): install the tracking script on your site
-- [Conversations API](/getting-started/get-enriched-chat-from-customer): retrieve conversations and insights
-- [MCP Server](/mcp/overview): connect Thred tools in Cursor, Claude Desktop, and other MCP clients
+## Conversations API
 
-## 1) Track AI Search Signals
+<CardGroup cols={2}>
+  <Card title="Get Conversation by Email" icon="envelope" href="/getting-started/get-enriched-chat-from-customer">
+    Look up one customer record by email.
+  </Card>
+  <Card title="Get Conversation by Customer ID" icon="rectangle-code" href="/getting-started/fetch-leads">
+    Query one customer record by ID.
+  </Card>
+  <Card title="Get Conversations by Company" icon="building" href="/getting-started/fetch-by-company">
+    Return matched conversation records for a company.
+  </Card>
+  <Card title="Get Recent Conversations" icon="clock-rotate-left" href="/getting-started/fetch-recent-conversations">
+    Pull latest conversations with platform and date filters.
+  </Card>
+</CardGroup>
 
-Install the script first to capture AI search signals:
+## MCP Server
 
-```html
-<script src="https://cdn.thred.dev/thred-track.js?browserKey=YOUR_BROWSER_KEY"></script>
-```
-
-Start here: [Website Script](/script-tracking/ai-search-signals)
-
-For conversion capture setup, see [Custom Form Tracking](/script-tracking/form-tracking) and [Cal.com Form Tracking](/integrations/calcom).
-
-## 2) Conversations API
-
-Use the API to pull customer transcripts and insight payloads.
-
-Base URL:
-
-```bash
-https://api.thred.dev/v1
-```
-
-Authentication:
-
-```bash
-Authorization: Bearer YOUR_API_KEY
-```
-
-| Use case                      | Endpoint                                             |
-| ---------------------------- | ---------------------------------------------------- |
-| Fetch by email               | `GET /customers?email=<email>`                       |
-| Fetch by customer ID         | `GET /customers/:customerId`                         |
-| Fetch by company             | `GET /customers/by-company?name=<company_name>`      |
-| Fetch recent conversations   | `GET /customers/recent`                              |
-
-## 3) MCP Server
-
-Connect the hosted MCP endpoint in your client:
-
-```text
-https://mcp.thred.dev/v1?apiKey=YOUR_THRED_API_KEY
-```
-
-MCP docs:
-
-- [Thred MCP Overview](/mcp/overview)
-- [MCP Setup](/mcp/setup)
-- [MCP Tools Reference](/mcp/tools-reference)
-
-Also includes:
-
-- [Cal.com Form Tracking](/integrations/calcom)
+<CardGroup cols={2}>
+  <Card title="Thred MCP Overview" icon="robot" href="/mcp/overview">
+    Understand MCP capabilities and available tools.
+  </Card>
+  <Card title="MCP Setup" icon="plug" href="/mcp/setup">
+    Connect Cursor, Claude Desktop, and other MCP clients.
+  </Card>
+  <Card title="MCP Tools Reference" icon="screwdriver-wrench" href="/mcp/tools-reference">
+    Review tool inputs and example payloads.
+  </Card>
+</CardGroup>
