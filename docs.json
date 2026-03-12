@@ -16,12 +16,26 @@
         ]
       },
       {
+        "group": "Website Script",
+        "pages": [
+          "script-tracking/ai-search-signals"
+        ]
+      },
+      {
         "group": "Conversations API",
         "pages": [
           "getting-started/get-enriched-chat-from-customer",
           "getting-started/fetch-leads",
           "getting-started/fetch-by-company",
           "getting-started/fetch-recent-conversations"
+        ]
+      },
+      {
+        "group": "MCP Server",
+        "pages": [
+          "mcp/overview",
+          "mcp/setup",
+          "mcp/tools-reference"
         ]
       },
       {
